@@ -1,5 +1,6 @@
 # Use the official PyTorch image as a base
-FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+#FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -14,5 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Define the entry point for the container
-ENTRYPOINT ["python", "src/train.py"]
+ENTRYPOINT ["python", "src/train2.py"]
 
