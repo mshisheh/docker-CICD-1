@@ -28,3 +28,16 @@ jobs:
     # Push the Docker image
     - name: Push the Docker image
       run: docker push mshisheh/linear-sklearn:latest
+
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ubuntu  # Or ec2-user if using Amazon Linux
+        key: ${{ secrets.DEPLOY_KEY }}
+        script: |
+          docker pull mshisheh/linear-sklearn
+          docker stop linear-sklearn || true
+          docker rm linear-sklearn || true
+          docker run -d --name linear-sklearn -p 80:80 mshisheh/linear-sklearn:latest
