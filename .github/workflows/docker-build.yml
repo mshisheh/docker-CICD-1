@@ -14,6 +14,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Run tests
+      run: |
+        python -m unittest discover -s tests
+
     # Log in to Docker Hub
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
@@ -30,14 +34,14 @@ jobs:
       run: docker push mshisheh/linear-sklearn:latest
 
 
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@v0.1.9
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ubuntu  # Or ec2-user if using Amazon Linux
-        key: ${{ secrets.DEPLOY_KEY }}
-        script: |
-          docker pull mshisheh/linear-sklearn
-          docker stop linear-sklearn || true
-          docker rm linear-sklearn || true
-          docker run -d --name linear-sklearn -p 80:80 mshisheh/linear-sklearn:latest
+    # - name: Deploy to EC2
+    #   uses: appleboy/ssh-action@v0.1.9
+    #   with:
+    #     host: ${{ secrets.EC2_HOST }}
+    #     username: ubuntu  # Or ec2-user if using Amazon Linux
+    #     key: ${{ secrets.DEPLOY_KEY }}
+    #     script: |
+    #       docker pull mshisheh/linear-sklearn
+    #       docker stop linear-sklearn || true
+    #       docker rm linear-sklearn || true
+    #       docker run -d --name linear-sklearn -p 80:80 mshisheh/linear-sklearn:latest
