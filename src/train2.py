@@ -18,4 +18,6 @@ print("Training model")
 model.fit(X, y)
 
 # After fitting, we can check the coefficient and intercept
+print("Model trained")
 print(f"Coefficient: {model.coef_[0][0]}, Intercept: {model.intercept_[0]}")
+print(f"The expected coeeficnet was 2.0")
