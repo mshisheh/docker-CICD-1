@@ -14,7 +14,7 @@ class TestLinearRegressionModel(unittest.TestCase):
         model.fit(self.X, self.y)
 
         # The expected coefficient is 2.0, so we check if it is within a small tolerance
-        expected_coefficient = 200.0
+        expected_coefficient = 2.0
         self.assertAlmostEqual(model.coef_[0][0], expected_coefficient, delta=0.1)
 
         # The intercept should be close to 0.0 (since the data generation process has no large bias)
