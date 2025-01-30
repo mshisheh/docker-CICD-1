@@ -1,6 +1,8 @@
 from sklearn.linear_model import LinearRegression
 import numpy as np
 import os
+import mlflow
+import mlflow.sklearn
 
 # Number of iterations (not needed for sklearn, but keeping it for environment parity)
 epochs = int(os.getenv("EPOCHS", 10))
@@ -21,3 +23,13 @@ model.fit(X, y)
 print("Model trained")
 print(f"Coefficient: {model.coef_[0][0]}, Intercept: {model.intercept_[0]}")
 print(f"The expected coeeficnet was 2.0")
+
+# Start an MLflow run
+with mlflow.start_run():
+    # Log parameters and metrics
+    mlflow.log_param("epochs", epochs)
+    mlflow.log_metric("coefficient", model.coef_[0][0])
+    mlflow.log_metric("intercept", model.intercept_[0])
+
+    # Save the model as an artifact
+    mlflow.sklearn.log_model(model, artifact_path="model", registered_model_name="LinearRegressionModel_V1")
