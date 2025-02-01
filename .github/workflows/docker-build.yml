@@ -29,11 +29,13 @@ jobs:
       run: python src/train2.py  # Make sure your script logs to mlruns/
 
     # Step 5: Upload MLflow logs as an artifact
+  # Upload MLflow logs as an artifact
     - name: Upload MLflow logs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: mlflow-logs
         path: mlruns/
+
 
 
     # Log in to Docker Hub
