@@ -26,7 +26,7 @@ jobs:
 
     # Step 4: Train model & log MLflow results (if model training runs in CI)
     - name: Run training script
-      run: python src/train.py  # Make sure your script logs to mlruns/
+      run: python src/train2.py  # Make sure your script logs to mlruns/
 
     # Step 5: Upload MLflow logs as an artifact
     - name: Upload MLflow logs
